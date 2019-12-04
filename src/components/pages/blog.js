@@ -13,15 +13,23 @@ class Blog extends Component {
       blogItems: [],
       totalCount: 0,
       currentPage: 0,
-      isLoading: true
+      isLoading: true,
+      blogModalIsOpen: false
     };
 
     this.getBlogItems = this.getBlogItems.bind(this);
-    this.onscroll = this.onscroll.bind(this);
-    window.addEventListener("scroll", this.onscroll, false);
+    this.onScroll = this.onScroll.bind(this);
+    window.addEventListener("scroll", this.onScroll, false);
+    this.handleNewBlogClick = this.handleNewBlogClick.bind(this);
   }
 
-  onscroll() {
+  handleNewBlogClick() {
+    this.setState({
+      blogModalIsOpen: true
+    });
+  }
+
+  onScroll() {
     if (
       this.state.isLoading ||
       this.state.blogItems.length === this.state.totalCount
@@ -68,7 +76,7 @@ class Blog extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.onscroll, false);
+    window.removeEventListener("scroll", this.onScroll, false);
   }
 
   render() {
@@ -78,7 +86,12 @@ class Blog extends Component {
 
     return (
       <div className="blog-container">
-      <BlogModal />
+        <BlogModal modalIsOpen={this.state.blogModalIsOpen} />
+
+        <div className="new-blog-link">
+          <a onClick={this.handleNewBlogClick}>Open Modal!</a>
+        </div>
+
         <div className="content-container">{blogRecords}</div>
 
         {this.state.isLoading ? (

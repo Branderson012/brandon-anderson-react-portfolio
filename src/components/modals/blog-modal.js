@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReactModal from 'react-modal';
+import React, { Component } from "react";
+import ReactModal from "react-modal";
 
 export default class BlogModal extends Component {
   constructor(props) {
@@ -8,9 +8,9 @@ export default class BlogModal extends Component {
 
   render() {
     return (
-      <ReactModal isOpen={true}>
-      <h1>I'm in a modal!</h1>
+      <ReactModal isOpen={this.props.modalIsOpen}>
+        <h1>I'm in a modal!</h1>
       </ReactModal>
-    )
+    );
   }
 }
