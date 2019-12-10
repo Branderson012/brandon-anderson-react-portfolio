@@ -20,7 +20,7 @@ export default class PortfolioForm extends Component {
       logo: "",
       editMode: false,
       apiUrl: "https://brandonanderson12.devcamp.space/portfolio/portfolio_items",
-      apiAction: 'post'
+      apiAction: "post"
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,18 +38,20 @@ export default class PortfolioForm extends Component {
   }
 
   deleteImage(imageType) {
-    axios.delete(
-      `https://api.devcamp.space/portfolio/delete-portfolio-image/${this.state
-        .id}?image_type=${imageType}`, 
-      { withCredentials: true }
-    )
-    .then(response => {
-      this.setState({
-        [`${imageType}_url`]: ""
+    axios
+      .delete(
+        `https://api.devcamp.space/portfolio/delete-portfolio-image/${this.state
+          .id}?image_type=${imageType}`,
+        { withCredentials: true }
+      )
+      .then(response => {
+        this.setState({
+          [`${imageType}_url`]: ""
+        });
       })
-    }).catch(error => {
-      console.log("deleteImage error", error);
-    })
+      .catch(error => {
+        console.log("deleteImage error", error);
+      });
   }
 
   componentDidUpdate() {
@@ -173,7 +175,7 @@ export default class PortfolioForm extends Component {
           logo: "",
           editMode: false,
           apiUrl: "https://brandonanderson12.devcamp.space/portfolio/portfolio_items",
-          apiAction: 'post'
+          apiAction: "post"
         });
 
         [this.thumbRef, this.bannerRef, this.logoRef].forEach(ref => {
@@ -272,24 +274,22 @@ export default class PortfolioForm extends Component {
               </div>
             </div>
           ) : (
-          <DropzoneComponent
-            ref={this.bannerRef}
-            config={this.componentConfig()}
-            djsConfig={this.djsConfig()}
-            eventHandlers={this.handleBannerDrop()}
-          >
-            <div className="dz-message">Banner</div>
-          </DropzoneComponent>
+            <DropzoneComponent
+              ref={this.bannerRef}
+              config={this.componentConfig()}
+              djsConfig={this.djsConfig()}
+              eventHandlers={this.handleBannerDrop()}
+            >
+              <div className="dz-message">Banner</div>
+            </DropzoneComponent>
           )}
-          
+
           {this.state.logo_url && this.state.editMode ? (
             <div className="portfolio-manager-image-wrapper">
               <img src={this.state.logo_url} />
 
               <div className="image-removal-link">
-                <a onClick={() => this.deleteImage("logo")}>
-                  Remove file
-                </a>
+                <a onClick={() => this.deleteImage("logo")}>Remove file</a>
               </div>
             </div>
           ) : (
